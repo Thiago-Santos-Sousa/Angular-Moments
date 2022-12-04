@@ -27,7 +27,7 @@
       <div>
         <div class="comment-container" *ngFor="let comment of   moment.comments">
           <p class="comment">{{ comment.text }}</p>
-          <p class="author"><span>por:</span>{{ comment.username }}</p>
+          <p class="author"><span>por: </span>{{ comment.username }}</p>
         </div>
       </div>
     </div>
@@ -37,14 +37,29 @@
   </div>
   <div class="comment-form">
     <h3>Deixe um comentário:</h3>
-    <form>
+    <form [formGroup]="comentForm" #formDir="ngForm" (ngSubmit)="onSubmit(formDir)">
       <div class="form-group">
         <label for="text">Comentário:</label>
-        <textarea placeholder="Faça o seu comentário" required></textarea>
+        <textarea 
+        formControlName="text" 
+        placeholder="Faça o seu comentário" 
+        required>
+        </textarea>
+        <div *ngIf="text.invalid && formDir.submitted" class="validation-error">
+          <p *ngIf="text.errors?.['required']">O texto é obrigatório.</p>
+        </div>
       </div>
       <div class="form-group">
         <label for="username">Nome:</label>
-        <input type="text" placeholder="Informe o seu nome" required>
+        <input 
+        formControlName="username" 
+        type="text" 
+        placeholder="Informe o seu nome" 
+        required
+        />
+        <div *ngIf="username.invalid && formDir.submitted" class="validation-error">
+          <p *ngIf="username.errors?.['required']">O nome é obrigatório.</p>
+        </div>
       </div>
       <input type="submit" value="Comentar!">
     </form>

@@ -3,6 +3,7 @@ nav{
   justify-content: space-between;
   padding: 1em;
   border-bottom: 1px solid #777;
+  background-color: rgb(148, 187, 245);
 }
 
 .brand, .links{
@@ -21,7 +22,7 @@ nav{
 }
 
 .brand:hover > h2{
-  color: #dec129;
+  color: #ffffff;
 }
 
 .links li{
@@ -29,14 +30,18 @@ nav{
   list-style: none;
 }
 
+a:hover {
+  color: #ffffff;
+}
+
 .links a{
   padding: 0.1em 0.3em;
 }
 
 #add a{
-  color: #dec129;
+  color: #ffffff;
 }
 
 #add a:hover{
-  background-color: #efefef;
+  background-color: #444;
 }

@@ -1,32 +1,42 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Moment } from '../../Moment';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Moment } from 'src/app/Moment';
 
 @Component({
   selector: 'app-moment-form',
   templateUrl: './moment-form.component.html',
-  styleUrls: ['./moment-form.component.css']
+  styleUrls: ['./moment-form.component.css'],
 })
 export class MomentFormComponent implements OnInit {
   @Output() onSubmit = new EventEmitter<Moment>();
-  @Input() btnText!: string;
   @Input() momentData: Moment | null = null;
+  @Input() btnText!: string;
+
+  image?: File;
 
   momentForm!: FormGroup;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
-    this.momentForm = new FormGroup({
-      id: new FormControl(this.momentData ? this.momentData.id: ''),
-      title: new FormControl(this.momentData ? this.momentData.title: '', [
-        Validators.required
-      ]),
-      description: new FormControl(this.momentData ? this.momentData.description: '', 
-      [Validators.required]
-      ),
-      image: new FormControl(''),
-    });
+    if (this.momentData) {
+      console.log(this.momentData);
+      this.momentForm = new FormGroup({
+        id: new FormControl(this.momentData.id),
+        title: new FormControl(this.momentData.title, [Validators.required]),
+        description: new FormControl(this.momentData.description, [
+          Validators.required,
+        ]),
+        image: new FormControl(''),
+      });
+    } else {
+      this.momentForm = new FormGroup({
+        id: new FormControl(''),
+        title: new FormControl('', [Validators.required]),
+        description: new FormControl('', [Validators.required]),
+        image: new FormControl(''),
+      });
+    }
   }
 
   get title() {
@@ -36,16 +46,15 @@ export class MomentFormComponent implements OnInit {
   get description() {
     return this.momentForm.get('description')!;
   }
-  
-  onFileSelected(event: any) {
 
+  onFileSelected(event: any) {
     const file: File = event.target.files[0];
 
-    this.momentForm.patchValue({image: file});
+    this.momentForm.patchValue({ image: event.target.files[0] });
   }
 
   submit() {
-    if(this.momentForm.invalid) {
+    if (this.momentForm.invalid) {
       return;
     }
 
@@ -53,5 +62,4 @@ export class MomentFormComponent implements OnInit {
 
     this.onSubmit.emit(this.momentForm.value);
   }
-
 }

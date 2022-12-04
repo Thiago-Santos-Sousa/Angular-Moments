@@ -19,11 +19,13 @@ img {
 .about-moment,
 .actions {
   padding-bottom: 1em;
-  border-bottom: 1px solid #CCC;
+  border-bottom: 1px solid #ccc;
   padding: 1.2em;
 }
 
 .actions {
+  width: 60%;
+  margin: 0 auto;
   background-color: #eee;
 }
 
@@ -40,16 +42,16 @@ img {
 
 .comment-container {
   text-align: left;
-  border-bottom: 1px solid #EFEFEF;
+  border-bottom: 1px solid #efefef;
   padding: 1em 0;
 }
 
 .comment {
-  font-size: .9em;
+  font-size: 0.9em;
 }
 
 .author {
-  font-size: .8em;
+  font-size: 0.8em;
 }
 
 .comment-form {
@@ -60,7 +62,6 @@ img {
   margin-top: 1em;
   text-align: left;
   max-width: 300px;
-  margin-left: 0;
 }
 
 .author span {
